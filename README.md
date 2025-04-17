@@ -35,7 +35,7 @@ This project is a domain-specific document ingestion and question-answering assi
 
 ---
 
-### 3. 🌐 (Bonus) Web Search Mode
+### 3. 🌐 Web Search Mode
 
 If no local data answers the question:
 - The assistant falls back to a web search using **SerpAPI** (Google Search wrapper)
@@ -72,8 +72,11 @@ The system uses a keyword filter to detect whether a document is concert-related
 ---
 
 
+
+
 ## 🛠️ Project Structure
 
+```plaintext
 provectus_concert_bot/
 ├── data/
 │   ├── raw_docs/           # Uploaded raw text files
