@@ -6,27 +6,44 @@ This project is a domain-specific document ingestion and question-answering assi
 
 ## 🔄 Core Functionality
 
+## 🔄 Core Functionality & Design Choices
+
 ### 1. 📄 Document Ingestion
-- Upload `.txt` files containing concert-related info (e.g. tour plans, dates, venues).
-- System determines if the document is related to **concerts/touring** using keyword checks.
-- If relevant:
-  - A summarizer (BART-based) generates a concise summary.
-  - The summary is embedded using MiniLM and stored in **FAISS**.
-- If not:
-  - User gets a polite message saying it's not a concert-related document.
+
+- Users upload plain `.txt` documents related to tours, concerts, schedules, and logistics.
+- Documents are filtered using a keyword-based concert detector to reject unrelated files (e.g. business reports).  
+  > 🛠 **Design Choice**: We used a keyword matcher for simplicity; while not perfect, it performs well for MVP. Future work could use a lightweight classifier.
+
+- For relevant docs:
+  - A summary is generated using the **`facebook/bart-large-cnn`** model from Hugging Face.
+    > 🧠 **Why BART from Hugging Face?** It’s free, open-source, doesn’t require OpenAI API keys, and gives strong summarization for factual text.
+
+  - The summary is embedded using **MiniLM** (via `sentence-transformers`) and stored in a FAISS index.
+    > 💾 **Why FAISS?** Fast local vector search, better for semantic similarity than using SQLite alone.
+
+---
 
 ### 2. 🤔 Question Answering (RAG-based)
-- User types a natural-language question (e.g. _"Where is Lady Gaga performing in autumn 2025?"_)
-- System searches FAISS for relevant summaries using vector similarity.
-- If similarity is high enough, context is passed to the summarization model to answer.
-- If no relevant data is found, a fallback message is shown.
+
+- The user can ask natural language questions (e.g., *"Where is Lady Gaga performing?"*).
+- The system:
+  1. Embeds the question
+  2. Finds the most similar document summaries using FAISS
+  3. If similarity is high enough, constructs an answer using the summarization model
+  4. If nothing relevant is found, gracefully declines to answer
+
+> 🔒 We added a **similarity threshold** so irrelevant results (like “Gaga” answers for a “Beyoncé” question) are not returned.
+
+---
 
 ### 3. 🌐 (Bonus) Web Search Mode
-If the system cannot answer based on local data:
-- Extracts the likely artist name from the query (e.g. _"Beyoncé"_ from _"Is Beyoncé touring in 2026?"_)
-- Uses **SerpAPI** to search Google for real-time concert info.
-- Parses top results and returns snippets about concerts/tours.
-- Web results are clearly marked with: “*Retrieved from web*”
+
+If no local data answers the question:
+- The assistant falls back to a web search using **SerpAPI** (Google Search wrapper)
+- Extracts the artist name from the query using heuristics
+- Queries public results like: `"Taylor Swift 2025 2026 tour schedule"`
+- Returns a few clean snippets
+- UI clearly shows the info was retrieved via web
 
 ---
 
@@ -52,6 +69,26 @@ The system uses a keyword filter to detect whether a document is concert-related
 - ❌ **False Negatives** (e.g., less obvious concert docs)
 
 > ✨ Future enhancement: use a text classifier or zero-shot classification for more accurate filtering.
+
+---
+
+
+## 🛠️ Project Structure
+
+provectus_concert_bot/
+├── data/
+│   ├── raw_docs/           # Uploaded raw text files
+│   └── processed/          # FAISS index
+├── ui/
+│   └── app.py              # Streamlit interface
+├── document_ingestion.py   # Ingest/summarize/filter docs
+├── qa_service.py           # RAG question-answering logic
+├── web_search.py           # Artist lookup via web
+├── utils.py                # Helper/debug tools
+├── setup.sh                # One-click setup script
+├── requirements.txt
+├── .env
+└── README.md
 
 ---
 
@@ -81,3 +118,6 @@ SERPAPI_KEY=your_serpapi_key_here
 ### 5. Run the App
 ```bash
 streamlit run ui/app.py
+```
+
+
