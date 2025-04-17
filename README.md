@@ -4,7 +4,6 @@ This project is a domain-specific document ingestion and question-answering assi
 
 ---
 
-## 🔄 Core Functionality
 
 ## 🔄 Core Functionality & Design Choices
 
