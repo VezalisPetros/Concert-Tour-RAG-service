@@ -61,3 +61,23 @@ The system uses a keyword filter to detect whether a document is concert-related
 ```bash
 git clone https://github.com/YOUR_USERNAME/ProvectusInternship_YourNameCamelCase.git
 cd ProvectusInternship_YourNameCamelCase
+```
+### 2.  Create & Activate Virtual Environment
+```bash
+python -m venv venv
+# On Windows:
+venv\Scripts\activate
+# On Mac/Linux:
+source venv/bin/activate
+```
+### 3.  Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+### 4. Add Environment Variables
+```bash
+SERPAPI_KEY=your_serpapi_key_here
+```
+### 5. Run the App
+```bash
+streamlit run ui/app.py
