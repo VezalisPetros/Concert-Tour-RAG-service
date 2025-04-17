@@ -98,7 +98,7 @@ provectus_concert_bot/
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/ProvectusInternship_VezalisPetros.git
+git clone https://github.com/VezalisPetros/ProvectusInternship_VezalisPetros.git
 cd ProvectusInternship_VezalisPetros
 ```
 ### 2.  Create & Activate Virtual Environment
