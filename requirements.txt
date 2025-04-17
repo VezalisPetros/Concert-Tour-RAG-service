@@ -1,0 +1,32 @@
+# Core RAG functionality
+langchain
+langchain-community            # Required for FAISS, TextLoader, etc.
+langchain-huggingface          # Updated location of HuggingFaceEmbeddings
+faiss-cpu                      # Vector database
+tiktoken                       # Tokenizer for text splitting (used internally)
+python-dotenv                  # To load environment variables from .env
+
+# Summarization & Embeddings (Open Source)
+transformers                   # HuggingFace models (BART for summarization)
+torch                          # Backend for HuggingFace models
+sentence-transformers          # For MiniLM embeddings
+
+# NLP tools
+nltk                           # Optional: for preprocessing or keyword filtering
+scikit-learn                   # For cosine similarity scoring
+
+# Storage
+sqlite-utils                   # Simplified SQLite handling (not essential but nice to have)
+sqlalchemy                     # Useful for schema-bound storage if needed
+
+# UI (optional)
+streamlit
+
+# Bonus: Web lookup (optional)
+requests
+
+# General utilities
+pydantic                       # Data validation
+
+google-search-results  # SerpAPI official Python client
+

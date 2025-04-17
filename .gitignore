@@ -1,0 +1,12 @@
+# Don't upload your virtual environment
+venv/
+
+# Don't upload Python cache
+__pycache__/
+
+# Ignore environment settings
+.env
+
+# Ignore FAISS and SQLite DB (can be regenerated)
+data/processed/
+data/summary_store.db
