@@ -91,7 +91,7 @@ provectus_concert_bot/
 ├── requirements.txt
 ├── .env
 └── README.md
-
+```
 ---
 
 ## ⚡ Setup Instructions
