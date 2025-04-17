@@ -98,8 +98,8 @@ provectus_concert_bot/
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/ProvectusInternship_YourNameCamelCase.git
-cd ProvectusInternship_YourNameCamelCase
+git clone https://github.com/YOUR_USERNAME/ProvectusInternship_VezalisPetros.git
+cd ProvectusInternship_VezalisPetros
 ```
 ### 2.  Create & Activate Virtual Environment
 ```bash
