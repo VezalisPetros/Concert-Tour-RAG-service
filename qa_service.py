@@ -13,11 +13,16 @@ embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L
 qa_model = pipeline("summarization", model="facebook/bart-large-cnn")
 
 # Load FAISS vector index from disk
-faiss_index = FAISS.load_local(
-    "data/processed/faiss_index",
-    embeddings=embedding,
-    allow_dangerous_deserialization=True
-)
+index_path = "data/processed/faiss_index/index.faiss"
+if os.path.exists(index_path):
+    faiss_index = FAISS.load_local(
+        "data/processed/faiss_index",
+        embeddings=embedding,
+        allow_dangerous_deserialization=True
+    )
+else:
+    faiss_index = None
+    print("⚠️ FAISS index not found. Please ingest documents before asking questions.")
 
 
 def answer_question(user_query: str) -> str:
