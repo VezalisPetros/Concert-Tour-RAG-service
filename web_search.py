@@ -15,7 +15,7 @@ def search_artist_tour(user_query: str) -> str:
     artist = extract_artist_name(user_query)
     query = f"{artist} 2025 2026 concert tour schedule"
     #api_key = os.getenv("SERPAPI_KEY")
-    api_key=e8263931862b6ec52894b8c8f24d45038dc2fc1e5fd05b2cb92cdd57373ed64f
+    api_key="e8263931862b6ec52894b8c8f24d45038dc2fc1e5fd05b2cb92cdd57373ed64f"
 
     if not api_key:
         return "❌ SerpAPI key not found in .env"
