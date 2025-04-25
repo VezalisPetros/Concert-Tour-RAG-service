@@ -72,12 +72,14 @@ The system uses a keyword filter to detect whether a document is concert-related
 ---
 
 ## 🧪 Usage Tips
-Upload at least one .txt file before asking questions.
 
-If you ask something unrelated (e.g., Beyoncé) and it’s not in the data, it will try searching the web.
+1. Upload at least one .txt file before asking questions.
 
-Try uploading a business file — it will be rejected as "not concert-related."
+2. If you ask something unrelated (e.g., Beyoncé) and it’s not in the data, it will try searching the web.
 
+3. Try uploading a business file — it will be rejected as "not concert-related."
+
+---
 ## 🛠️ Project Structure
 
 ```plaintext
